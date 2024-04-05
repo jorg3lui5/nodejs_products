@@ -23,5 +23,5 @@ export class Producto {
   precio: number;
 
   @Column('enum', { enum: Talle })
-  talle: string;
+  talle: Talle;
 }

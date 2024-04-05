@@ -10,7 +10,7 @@ const typeOrmConfig: TypeOrmModuleOptions = {
     password: 'Ec9P_wsuVCuwRdtsKyImTbsvvkxhKQGD',
     database: 'ewfgwcgb',
     entities: [],
-    synchronize: false,
+    synchronize: true,
 };
 
 export { typeOrmConfig };

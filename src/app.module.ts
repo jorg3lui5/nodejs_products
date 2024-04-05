@@ -12,7 +12,7 @@ import { typeOrmConfig } from './config/typeorm.config';
     TypeOrmModule.forRoot({
       ...typeOrmConfig,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      //synchronize: true
+      synchronize: true
     }),
     CategoriaModule, 
     ProductoModule,
