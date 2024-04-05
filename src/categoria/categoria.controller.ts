@@ -21,16 +21,16 @@ export class CategoriaController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Categoria> {
-    return this.categoriaService.findOne(+id);
+    return this.categoriaService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCategoriaDto: UpdateCategoriaDto): Promise<Categoria> {
-    return this.categoriaService.update(+id, updateCategoriaDto);
+    return this.categoriaService.update(id, updateCategoriaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
-    return this.categoriaService.remove(+id);
+    return this.categoriaService.remove(id);
   }
 }

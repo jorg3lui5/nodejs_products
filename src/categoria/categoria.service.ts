@@ -5,6 +5,8 @@ import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 import { Categoria } from './entities/categoria.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
+
 @Injectable()
 export class CategoriaService {
   constructor(
@@ -13,7 +15,10 @@ export class CategoriaService {
   ) {}
 
   async create(createCategoriaDto: CreateCategoriaDto): Promise<Categoria> {
-    const categoria = this.categoriaRepository.create(createCategoriaDto);
+    const categoria = {
+      id: uuidv4(),
+      ...this.categoriaRepository.create(createCategoriaDto)
+    };
     return await this.categoriaRepository.save(categoria);
   }
 
@@ -22,20 +27,20 @@ export class CategoriaService {
     return this.verificarYRetornarCategorias(categorias);
   }
 
-  async findOne(id: number): Promise<Categoria> {
+  async findOne(id: string): Promise<Categoria> {
     const categoria = await this.categoriaRepository.findOne({where: {id: id}});
     if(!categoria)
       throw new NotFoundException(`No se encontraron datos.`)
     return categoria;
   }
 
-  async update(id: number, updateCategoriaDto: UpdateCategoriaDto): Promise<Categoria> {
+  async update(id: string, updateCategoriaDto: UpdateCategoriaDto): Promise<Categoria> {
     const categoria = await this.categoriaRepository.findOne({where: {id: id}});
     this.categoriaRepository.merge(categoria, updateCategoriaDto);
     return await this.categoriaRepository.save(categoria);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.categoriaRepository.delete(id);
   }
 

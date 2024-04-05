@@ -21,17 +21,17 @@ export class ProductoController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Producto> {
-    return this.productoService.findOne(+id);
+    return this.productoService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductoDto: UpdateProductoDto): Promise<Producto> {
-    return this.productoService.update(+id, updateProductoDto);
+    return this.productoService.update(id, updateProductoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
-    return this.productoService.remove(+id);
+    return this.productoService.remove(id);
   }
 
   @Get('/category/active')

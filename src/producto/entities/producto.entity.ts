@@ -6,8 +6,8 @@ import { Categoria } from '../../categoria/entities/categoria.entity';
 @Entity()
 @Index('idx_codigo', ['codigo'], { unique: true })
 export class Producto {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ length: 30, nullable: false })
   codigo: string;

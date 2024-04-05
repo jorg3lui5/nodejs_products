@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Producto } from './entities/producto.entity';
 import { Repository } from 'typeorm';
 import { Talle } from './enum/talle.enum';
-
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ProductoService {
@@ -16,7 +16,10 @@ export class ProductoService {
   ) {}
   
   async create(createProductoDto: CreateProductoDto): Promise<Producto> {
-    const producto = this.productoRepository.create(createProductoDto);
+    const producto = {
+      id: uuidv4(),
+      ...this.productoRepository.create(createProductoDto),
+    };
     return await this.productoRepository.save(producto);
   }
 
@@ -25,20 +28,20 @@ export class ProductoService {
     return this.verificarYRetornarProductos(productos);
   }
 
-  async findOne(id: number): Promise<Producto> {
+  async findOne(id: string): Promise<Producto> {
     const producto = await this.productoRepository.findOne({where: {id: id}});
     if(!producto)
       throw new NotFoundException(`No se encontraron datos.`)
     return producto;
   }
 
-  async update(id: number, updateProductoDto: UpdateProductoDto): Promise<Producto> {
+  async update(id: string, updateProductoDto: UpdateProductoDto): Promise<Producto> {
     const producto = await this.productoRepository.findOne({where: {id: id}});
     this.productoRepository.merge(producto, updateProductoDto);
     return await this.productoRepository.save(producto);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.productoRepository.delete(id);
   }
 

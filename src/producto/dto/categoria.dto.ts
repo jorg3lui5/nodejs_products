@@ -1,11 +1,10 @@
 /* eslint-disable prettier/prettier */
 
-import { IsInt, IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
 
 export class CategoriaDto {
     @IsNotEmpty()
-    @IsNumber()
-    @IsInt()
-    id: number;
+    @IsString()
+    id: string;
 }
