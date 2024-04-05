@@ -9,17 +9,17 @@ export class Producto {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 30 })
+  @Column({ length: 30, nullable: false })
   codigo: string;
 
-  @Column({ length: 100 })
+  @Column({ length: 100, nullable: false })
   nombre: string;
 
   @ManyToOne(() => Categoria, categoria => categoria.productos)
   @JoinColumn({name: "categoria_id"})
   categoria: Categoria;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2, nullable: false })
   precio: number;
 
   @Column('enum', { enum: Talle })

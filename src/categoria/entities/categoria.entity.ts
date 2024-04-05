@@ -7,10 +7,10 @@ export class Categoria {
     @PrimaryGeneratedColumn()
     id: number;
   
-    @Column({ length: 100 })
+    @Column({ length: 100, nullable: false })
     nombre: string;
   
-    @Column({ length: 255 })
+    @Column({ length: 255, nullable: false })
     descripcion: string;
   
     @Column({ default: true })
