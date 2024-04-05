@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Producto } from 'src/producto/entities/producto.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Categoria {
@@ -18,4 +18,10 @@ export class Categoria {
   
     @OneToMany(() => Producto, producto => producto.categoria)
     productos: Producto[];
+
+    @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    created_at: Date;
+
+    @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+    updated_at: Date;
   }
