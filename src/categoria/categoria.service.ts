@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 import { Categoria } from './entities/categoria.entity';
@@ -18,11 +18,15 @@ export class CategoriaService {
   }
 
   async findAll(): Promise<Categoria[]> {
-    return await this.categoriaRepository.find();
+    const categorias = await this.categoriaRepository.find();
+    return this.verificarYRetornarCategorias(categorias);
   }
 
   async findOne(id: number): Promise<Categoria> {
-    return await this.categoriaRepository.findOne({where: {id: id}});
+    const categoria = await this.categoriaRepository.findOne({where: {id: id}});
+    if(!categoria)
+      throw new NotFoundException(`No se encontraron datos.`)
+    return categoria;
   }
 
   async update(id: number, updateCategoriaDto: UpdateCategoriaDto): Promise<Categoria> {
@@ -33,5 +37,11 @@ export class CategoriaService {
 
   async remove(id: number): Promise<void> {
     await this.categoriaRepository.delete(id);
+  }
+
+  private async verificarYRetornarCategorias(categorias: Categoria[]): Promise<Categoria[]> {
+    if (categorias.length === 0)
+      throw new NotFoundException(`No se encontraron datos.`);
+    return categorias;
   }
 }

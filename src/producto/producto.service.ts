@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,11 +21,15 @@ export class ProductoService {
   }
 
   async findAll(): Promise<Producto[]> {
-    return await this.productoRepository.find();
+    const productos = await this.productoRepository.find();
+    return this.verificarYRetornarProductos(productos);
   }
 
   async findOne(id: number): Promise<Producto> {
-    return await this.productoRepository.findOne({where: {id: id}});
+    const producto = await this.productoRepository.findOne({where: {id: id}});
+    if(!producto)
+      throw new NotFoundException(`No se encontraron datos.`)
+    return producto;
   }
 
   async update(id: number, updateProductoDto: UpdateProductoDto): Promise<Producto> {
@@ -40,7 +44,7 @@ export class ProductoService {
 
   async findAllWithActiveCategory(): Promise<Producto[]> { 
     // Realiza la consulta para obtener los productos con sus categorías activas
-    return await this.productoRepository.find({
+    const productos = await this.productoRepository.find({
       relations: ['categoria'], 
       where: {
         categoria: {
@@ -48,14 +52,21 @@ export class ProductoService {
         },
       },
     });  
+    return this.verificarYRetornarProductos(productos);
   }
 
-  async findAllWithTalleMediumLarge(): Promise<Producto[]>  {    
-    return await this.productoRepository.find();
-    // const talles = ['MEDIUM', 'LARGE'];
-    // return await this.productoRepository
-    //     .createQueryBuilder('producto')
-    //     .where('producto.talle = :talle1', { talle1: 'MEDIUM'})
-    //     .getMany();
-}
+  async findAllWithTalleMediumLarge(): Promise<Producto[]>  {
+    const talles = [Talle.MEDIUM, Talle.LARGE];
+    const productos = await this.productoRepository
+        .createQueryBuilder('producto')
+        .where('producto.talle IN (:...talles)', { talles })
+        .getMany();
+    return this.verificarYRetornarProductos(productos);
+  }
+
+  private async verificarYRetornarProductos(productos: Producto[]): Promise<Producto[]> {
+    if (productos.length === 0)
+      throw new NotFoundException(`No se encontraron datos.`);
+    return productos;
+  }
 }
