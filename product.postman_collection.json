@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "b933a448-6383-47dd-a8ff-ff577d39223e",
+		"name": "product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14808479"
+	},
+	"item": [
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "Recupera todas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recupera Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categoria/4a61060e-c461-4c01-a80b-d2f77589d8ae",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria",
+								"4a61060e-c461-4c01-a80b-d2f77589d8ae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Cosméticos\",\r\n  \"descripcion\": \"Cosmetología y accesorios\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar categoria",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Deportes\",\r\n  \"descripcion\": \"Equipamiento deportivo y accesorios\",\r\n  \"activa\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria/48fafed6-0834-4e55-bbc2-88d9b01ef8d6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria",
+								"48fafed6-0834-4e55-bbc2-88d9b01ef8d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria/5804e6d9-5c9c-447f-a65c-7882d149c2d5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria",
+								"5804e6d9-5c9c-447f-a65c-7882d149c2d5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": []
+		},
+		{
+			"name": "Recupera todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recupera Por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/producto/5b3e4cf1-826e-4216-8b35-8b597a7cc7ab",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						"5b3e4cf1-826e-4216-8b35-8b597a7cc7ab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recupera productos con categoria activa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/producto/category/active",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						"category",
+						"active"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recupera productos con talle Medium o Large",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/producto/talle/medium-large",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						"talle",
+						"medium-large"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo\": \"P002\",\r\n    \"nombre\": \"Computadora\",\r\n    \"categoria\": {\r\n        \"id\": \"4a61060e-c461-4c01-a80b-d2f77589d8ae\"\r\n    },\r\n    \"precio\": 2080.99,\r\n    \"talle\": \"MEDIUM\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar producto",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo\": \"C001\",\r\n    \"nombre\": \"Celular\",\r\n    \"categoria\": {\r\n        \"id\": \"4a61060e-c461-4c01-a80b-d2f77589d8ae\"\r\n    },\r\n    \"precio\": 155.99,\r\n    \"talle\": \"SMALL\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/producto/5b3e4cf1-826e-4216-8b35-8b597a7cc7ab",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						"5b3e4cf1-826e-4216-8b35-8b597a7cc7ab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar producto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/producto/0b22df2d-39cb-4517-b00c-9c8b06af6853",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						"0b22df2d-39cb-4517-b00c-9c8b06af6853"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
