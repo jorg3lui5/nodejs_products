@@ -12,9 +12,9 @@ Para ver los servicios con swagger ir a la siguiente url:
 
 ## Version
 Esta api se implementó con las siguientes versiones:
-node: v20.12.1
-nest: 10.3.2
-npm: 10.5.0
+- node: v20.12.1
+- nest: 10.3.2
+- npm: 10.5.0
 
 ## Consumo de servicios
 Los servicios se pueden consumir directamente desde swagger.
