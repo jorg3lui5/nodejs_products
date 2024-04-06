@@ -18,7 +18,7 @@ Esta api se implementó con las siguientes versiones:
 
 ## Consumo de servicios
 Los servicios se pueden consumir directamente desde swagger.
-También se adjunta el archivo product.collection.json en la raiz del proyecto, para que se pueda consumir con postman u otra herramienta.
+También se adjunta el archivo product.postman_collection.json en la raiz del proyecto, para que se pueda consumir con postman u otra herramienta.
 
 ## Carga de datos iniciales.
 El aplicativo creará automáticamente la base datos en el caso de que no esté creada y creará 4 categorías, de las cuales 1 categoría no está activa.
