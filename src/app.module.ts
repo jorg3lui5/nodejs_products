@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ApiResponseInterceptor } from './interceptors/api-response.interceptor';
+import { CategoriasFixture } from './fixtures/categorias.fixture';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ApiResponseInterceptor } from './interceptors/api-response.interceptor'
       provide: APP_INTERCEPTOR,
       useClass: ApiResponseInterceptor,
     },
+    CategoriasFixture
   ],
 })
 export class AppModule {}

@@ -20,7 +20,6 @@ export class CreateProductoDto {
 
     @IsNotEmpty()
     @IsDecimal()
-    @Min(1.01)
     precio: number;
 
     @IsNotEmpty()

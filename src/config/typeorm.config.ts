@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 // config/typeorm.config.ts
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Producto } from '../producto/entities/producto.entity';
+import { Categoria } from '../categoria/entities/categoria.entity';
 
 const typeOrmConfig: TypeOrmModuleOptions = {
     type: 'postgres',
@@ -9,7 +11,7 @@ const typeOrmConfig: TypeOrmModuleOptions = {
     username: 'ewfgwcgb',
     password: 'Ec9P_wsuVCuwRdtsKyImTbsvvkxhKQGD',
     database: 'ewfgwcgb',
-    entities: [],
+    entities: [Producto, Categoria],
     synchronize: true,
 };
 
